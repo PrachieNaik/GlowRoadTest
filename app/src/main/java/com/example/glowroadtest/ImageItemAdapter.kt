@@ -34,23 +34,20 @@ class ImageItemAdapter :
         return urls.size
     }
 
-    class ItemVH(private val itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private var text: TextView = itemView.findViewById(R.id.grid_item_tv)
         private var image: ImageView = itemView.findViewById(R.id.grid_item_image)
 
         fun bindItems(item: Photo) {
-            with(itemView)
-            {
-                text.text = item.title
+            text.text = item.title
 
-                Glide.with(itemView)
-                    .load(item.getUrl())
-                    .centerCrop()
-                    .placeholder(R.drawable.ic_launcher_background)
-                    .error(R.drawable.ic_launcher_foreground)
-                    .fallback(R.drawable.ic_launcher_background)
-                    .into(image)
-            }
+            Glide.with(itemView)
+                .load(item.getUrl())
+                .centerCrop()
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_foreground)
+                .fallback(R.drawable.ic_launcher_background)
+                .into(image)
         }
     }
 

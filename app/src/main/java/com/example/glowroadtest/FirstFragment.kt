@@ -44,7 +44,6 @@ class FirstFragment : Fragment() {
         adapter.updateList(imageItemViewModel.photoUrls)
         addScrollListener()
         imageItemViewModel.livePhotoUrls.observe(viewLifecycleOwner, Observer {
-
             adapter.updateList(it)
         })
         addMoreElements()
@@ -66,8 +65,8 @@ class FirstFragment : Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 if (mIsLoading)
                     return
-                val visibleItemCount = layoutManager!!.childCount
-                val totalItemCount = layoutManager!!.itemCount
+                val visibleItemCount = layoutManager.childCount
+                val totalItemCount = layoutManager.itemCount
                 val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
                 if (pastVisibleItems + visibleItemCount >= totalItemCount) {
                     mIsLoading = true
@@ -82,8 +81,8 @@ class FirstFragment : Fragment() {
         mIsLoading = false
         var temp: Int? = imageItemViewModel.pageChange.value
         if (temp == null) {
-            imageItemViewModel.fetchData(2)
-            imageItemViewModel.pageChange.postValue(2)
+            imageItemViewModel.fetchData(1)
+            imageItemViewModel.pageChange.postValue(1)
         } else {
             imageItemViewModel.fetchData(temp + 1)
             imageItemViewModel.pageChange.postValue(temp + 1)
