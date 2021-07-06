@@ -67,9 +67,11 @@ class FirstFragment : Fragment() {
                 val visibleItemCount = layoutManager.childCount
                 val totalItemCount = layoutManager.itemCount
                 val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
-                if (pastVisibleItems + visibleItemCount >= totalItemCount) {
+                if (pastVisibleItems + visibleItemCount >= totalItemCount - 20) {
                     mIsLoading = true
-                    Handler().postDelayed({ addElements() }, 1000)
+                    //Handler().postDelayed({ addElements() }, 1000)
+                    addElements()
+
                 }
             }
         }
