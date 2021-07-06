@@ -1,11 +1,12 @@
-package com.example.glowroadtest
+package com.example.glowroadtest.viewmodels
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.glowroadtest.Network.CallBack
+import com.example.glowroadtest.network.ApiCallBack
 import com.example.glowroadtest.data.ImageDetails
 import com.example.glowroadtest.data.Photo
+import com.example.glowroadtest.repository.ImageDetailsRepository
 
 class ImageItemViewModel : ViewModel() {
     private val imageRepository = ImageDetailsRepository()
@@ -13,7 +14,7 @@ class ImageItemViewModel : ViewModel() {
     var pageChange = MutableLiveData<Int>()
 
     fun fetchData(id: Int) {
-        imageRepository.getImageDetails(object : CallBack<ImageDetails> {
+        imageRepository.getImageDetails(object : ApiCallBack<ImageDetails> {
             override fun onError() {
                 Log.e("ImageItemViewModel", "API FAILED")
             }

@@ -1,4 +1,4 @@
-package com.example.glowroadtest
+package com.example.glowroadtest.ui
 
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.glowroadtest.adapter.ImageItemAdapter
+import com.example.glowroadtest.viewmodels.ImageItemViewModel
 import com.example.glowroadtest.databinding.FragmentFirstBinding
 
 /**
@@ -36,14 +38,17 @@ class FirstFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpRecyclerView()
         imageItemViewModel = ViewModelProvider(this).get(ImageItemViewModel::class.java)
-
+        setUpRecyclerView()
         addScrollListener()
+        observeLiveImageData()
+        addImages()
+    }
+
+    private fun observeLiveImageData() {
         imageItemViewModel.liveImageData.observe(viewLifecycleOwner, Observer {
             adapter.updateList(it)
         })
-        addElements()
     }
 
     private fun setUpRecyclerView() {
@@ -68,7 +73,7 @@ class FirstFragment : Fragment() {
                 if (pastVisibleItems + visibleItemCount >= totalItemCount - 20) {
                     mIsLoading = true
                     //Handler().postDelayed({ addElements() }, 1000)
-                    addElements()
+                    addImages()
 
                 }
             }
@@ -76,9 +81,9 @@ class FirstFragment : Fragment() {
         binding.imageRecyclerView.addOnScrollListener(mScrollListener)
     }
 
-    private fun addElements() {
+    private fun addImages() {
         mIsLoading = false
-        var temp: Int? = imageItemViewModel.pageChange.value
+        val temp: Int? = imageItemViewModel.pageChange.value
         if (temp == null) {
             imageItemViewModel.fetchData(1)
             imageItemViewModel.pageChange.postValue(1)
