@@ -12,16 +12,16 @@ import com.example.glowroadtest.data.Photo
 class ImageItemAdapter :
     RecyclerView.Adapter<ImageItemAdapter.ItemVH>() {
 
-    private val urls = ArrayList<Photo>()
+    private val imageDetails = ArrayList<Photo>()
 
     fun updateList(list: List<Photo>) {
-        val temp = urls.size
-        urls.addAll(list)
+        val temp = imageDetails.size
+        imageDetails.addAll(list)
         notifyItemRangeChanged(temp, list.size)
     }
 
     override fun onBindViewHolder(holder: ItemVH, position: Int) {
-        holder.bindItems(urls[position])
+        holder.bindItems(imageDetails[position])
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemVH {
@@ -31,7 +31,7 @@ class ImageItemAdapter :
     }
 
     override fun getItemCount(): Int {
-        return urls.size
+        return imageDetails.size
     }
 
     class ItemVH(itemView: View) : RecyclerView.ViewHolder(itemView) {

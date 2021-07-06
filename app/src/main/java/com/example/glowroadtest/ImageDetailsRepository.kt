@@ -10,8 +10,6 @@ class ImageDetailsRepository {
     private val imageManager = ImageDetailsManager
 
     fun getImageDetails(callback: CallBack<ImageDetails>, id: String) {
-        Log.e("Repo", "getImageDetails")
         imageManager.getImageData(callback, id)
-
     }
 }
