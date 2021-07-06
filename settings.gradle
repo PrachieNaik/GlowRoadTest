@@ -1,0 +1,2 @@
+rootProject.name = "GlowRoadTest"
+include ':app'
