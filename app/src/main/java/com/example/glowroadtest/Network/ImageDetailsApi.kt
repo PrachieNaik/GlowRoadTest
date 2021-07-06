@@ -8,5 +8,4 @@ import retrofit2.http.Url
 interface ImageDetailsApi {
     @GET
     fun getImageDetailsList(@Url url:String): Call<ImageDetails>
-
 }

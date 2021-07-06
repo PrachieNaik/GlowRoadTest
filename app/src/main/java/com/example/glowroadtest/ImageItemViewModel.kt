@@ -11,7 +11,6 @@ class ImageItemViewModel : ViewModel() {
     private val imageRepository = ImageDetailsRepository()
     var livePhotoUrls = MutableLiveData<List<Photo>>()
     var pageChange = MutableLiveData<Int>()
-    var photoUrls = ArrayList<Photo>()
 
     fun fetchData(id: Int) {
         imageRepository.getImageDetails(object : CallBack<ImageDetails> {
@@ -23,7 +22,7 @@ class ImageItemViewModel : ViewModel() {
                 list?.let {
                     list.photos.photo.let {
                         livePhotoUrls.postValue(it)
-                        photoUrls.addAll(it)
+                       // photoUrls.addAll(it)
                     }
                     Log.e("ImageItemViewModel", "${livePhotoUrls.value}")
                 }

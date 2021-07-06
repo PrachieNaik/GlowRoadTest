@@ -41,12 +41,11 @@ class FirstFragment : Fragment() {
         setUpRecyclerView()
         imageItemViewModel = ViewModelProvider(this).get(ImageItemViewModel::class.java)
 
-        adapter.updateList(imageItemViewModel.photoUrls)
         addScrollListener()
         imageItemViewModel.livePhotoUrls.observe(viewLifecycleOwner, Observer {
             adapter.updateList(it)
         })
-        addMoreElements()
+        addElements()
     }
 
     private fun setUpRecyclerView() {
@@ -70,14 +69,14 @@ class FirstFragment : Fragment() {
                 val pastVisibleItems = layoutManager.findFirstVisibleItemPosition()
                 if (pastVisibleItems + visibleItemCount >= totalItemCount) {
                     mIsLoading = true
-                    Handler().postDelayed({ addMoreElements() }, 1000)
+                    Handler().postDelayed({ addElements() }, 1000)
                 }
             }
         }
         binding.imageRecyclerView.addOnScrollListener(mScrollListener)
     }
 
-    private fun addMoreElements() {
+    private fun addElements() {
         mIsLoading = false
         var temp: Int? = imageItemViewModel.pageChange.value
         if (temp == null) {
